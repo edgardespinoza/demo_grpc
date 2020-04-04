@@ -12,7 +12,7 @@ var packageDefinition = protoLoader.loadSync(
         oneofs: true
     });
 
-const article = grpc.loadPackageDefinition(packageDefinition).article;
+const article = grpc.loadPackageDefinition(packageDefinition).endpoints.examples.article.article;
 let db = require('./db.json');
 
 class Article {
