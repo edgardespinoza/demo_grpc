@@ -38,7 +38,6 @@ gcloud container clusters get-credentials cluster-1 --zone us-central1-c
 
 kubectl create -f grpc-article.yaml
 
-# docker build  -t gcr.io/identiy-grpc-iota/node-grpc-article-server:1.0 -f Dockerfile .
-# gcloud docker -- push gcr.io/identiy-grpc-iota/node-grpc-article-server:1.0
+# docker build  -t gcr.io/identiy-grpc-iota/node-grpc-article-server:2.0 -f Dockerfile .
+# gcloud docker -- push gcr.io/identiy-grpc-iota/node-grpc-article-server:2.0
 
-## docker run --detach --name=article gcr.io/identiy-grpc-iota/node-grpc-article-server:1.0
