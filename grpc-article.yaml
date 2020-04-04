@@ -1,0 +1,42 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: esp-grpc-article
+spec:
+  ports:
+  # Port that accepts gRPC and JSON/HTTP2 requests over HTTP.
+  - port: 80
+    targetPort: 9000
+    protocol: TCP
+    name: http2
+  selector:
+    app: esp-grpc-article
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: esp-grpc-article
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: esp-grpc-article
+    spec:
+      containers:
+      - name: esp
+        image: gcr.io/endpoints-release/endpoints-runtime:1
+        args: [
+          "--http2_port=9000",
+          "--service=article.endpoints.identiy-grpc-iota.cloud.goog",
+          "--rollout_strategy=managed",
+          "--backend=grpc://127.0.0.1:8000"
+        ]
+        ports:
+          - containerPort: 9000
+      - name: article
+        image: gcr.io/identiy-grpc-iota/node-grpc-article-server:1.0
+        ports:
+          - containerPort: 8000

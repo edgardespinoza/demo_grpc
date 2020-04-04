@@ -29,6 +29,8 @@
 
 syntax = "proto3";
 
+package endpoints.examples.article;
+
 service article {
   rpc getList (ArticleEmpty) returns (ArticleListReply) {}
 
